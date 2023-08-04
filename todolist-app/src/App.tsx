@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { produce } from "immer";
+import TodoList from "./components/TodoList";
+import InputTodo from "./components/InputTodo";
 
 export type TodoListItemType = {
   no: number;
@@ -7,7 +9,7 @@ export type TodoListItemType = {
   done: boolean;
 };
 
-function App() {
+const App = () => {
   const [todoList, setTodoList] = useState<Array<TodoListItemType>>([
     { no: 1, todo: "일어나기", done: false },
     { no: 2, todo: "물마시기", done: false },
@@ -38,7 +40,16 @@ function App() {
     setTodoList(newTodoList);
   };
 
-  return <div>todoList</div>;
-}
+  return (
+    <>
+      <InputTodo addTodo={addTodo} />
+      <TodoList
+        todoList={todoList}
+        toggleDone={toggleDone}
+        deleteTodo={deleteTodo}
+      />
+    </>
+  );
+};
 
 export default App;
